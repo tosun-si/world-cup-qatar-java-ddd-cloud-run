@@ -1,0 +1,16 @@
+/.git
+/.github
+/target
+/files
+/diagram
+/.dockerignore
+/.gitignore
+/.envrc
+/Dockerfile
+/deploy-app-cloud-run.yaml
+/*.md
+/.idea
+*.iml
+*.egg-info
+__pycache__
+.DS_Store
