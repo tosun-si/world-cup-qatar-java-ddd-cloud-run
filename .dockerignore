@@ -2,6 +2,7 @@
 /.github
 /target
 /files
+/scripts
 /diagram
 /.dockerignore
 /.gitignore

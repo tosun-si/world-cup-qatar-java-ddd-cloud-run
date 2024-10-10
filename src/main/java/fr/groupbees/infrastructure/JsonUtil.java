@@ -1,4 +1,4 @@
-package fr.groupbees.infrastructure.inmemory;
+package fr.groupbees.infrastructure;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class JsonUtil {
     public static final ObjectMapper OBJECT_MAPPER;
@@ -18,6 +20,17 @@ public class JsonUtil {
         mapper.configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, false);
 
         OBJECT_MAPPER = mapper;
+    }
+
+    public static <T> List<Map<String, Object>> convertListToMap(List<T> objects) {
+        List<Map<String, Object>> resultList = new ArrayList<>();
+
+        for (Object object : objects) {
+            Map<String, Object> objectMap = OBJECT_MAPPER.convertValue(object, Map.class);
+            resultList.add(objectMap);
+        }
+
+        return resultList;
     }
 
     public static <T> List<T> deserializeFromResourcePath(final String resourcePath, final TypeReference<List<T>> reference) {

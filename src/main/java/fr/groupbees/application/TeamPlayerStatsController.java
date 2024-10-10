@@ -26,6 +26,6 @@ public class TeamPlayerStatsController {
 
     @GetMapping("/teams/players/stats")
     public List<TeamPlayerStats> getTeamPlayerStats() {
-        return teamPlayerStatsService.findTeamPlayersStats();
+        return teamPlayerStatsService.findTeamPlayersStatsDomain();
     }
 }
