@@ -1,6 +1,7 @@
 package fr.groupbees.application;
 
 import fr.groupbees.domain.TeamPlayerStatsDomainObjects.TeamPlayerStats;
+import fr.groupbees.domain.TeamPlayerStatsRaw;
 import fr.groupbees.domain.service.TeamPlayerStatsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,18 @@ class TeamPlayerStatsServiceTest {
     private TeamPlayerStatsService teamPlayerStatsService;
 
     @Test
-    void whenSaveStatsDomain_thenHaveExpectedStatsAsResult() {
-        final List<TeamPlayerStats> teamStats = teamPlayerStatsService.saveStatsDomain();
+    void whenFindTeamPlayersStatsRaw_thenHaveExpectedStatsAsResult() {
+        final List<TeamPlayerStatsRaw> teamPlayersStatsRaw = teamPlayerStatsService.findTeamPlayersStatsRaw();
 
-        assertThat(teamStats).isNotNull();
-        assertThat(teamStats).isNotEmpty();
+        assertThat(teamPlayersStatsRaw).isNotNull();
+        assertThat(teamPlayersStatsRaw).isNotEmpty();
+    }
+
+    @Test
+    void whenSaveTeamPlayersStatsDomain_thenHaveExpectedStatsAsResult() {
+        final List<TeamPlayerStats> teamPlayersStats = teamPlayerStatsService.saveStatsDomain();
+
+        assertThat(teamPlayersStats).isNotNull();
+        assertThat(teamPlayersStats).isNotEmpty();
     }
 }
