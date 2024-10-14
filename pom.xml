@@ -92,6 +92,11 @@
 
         <dependency>
             <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-firestore</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.cloud</groupId>
             <artifactId>spring-cloud-gcp-starter-alloydb</artifactId>
         </dependency>
 
