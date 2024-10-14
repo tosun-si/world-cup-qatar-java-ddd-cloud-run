@@ -2,6 +2,7 @@ package fr.groupbees.application;
 
 import fr.groupbees.domain.TeamPlayerStatsDomainObjects.TeamPlayerStats;
 import fr.groupbees.domain.TeamPlayerStatsRaw;
+import fr.groupbees.domain.TeamPlayerStatsRawDatabaseConnector;
 import fr.groupbees.domain.service.TeamPlayerStatsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ class TeamPlayerStatsServiceTest {
 
     @Autowired
     private TeamPlayerStatsService teamPlayerStatsService;
+
+    @Autowired
+    private TeamPlayerStatsRawDatabaseConnector teamPlayerStatsRawDatabaseConnector;
 
     @Test
     void whenFindTeamPlayersStatsRaw_thenHaveExpectedStatsAsResult() {

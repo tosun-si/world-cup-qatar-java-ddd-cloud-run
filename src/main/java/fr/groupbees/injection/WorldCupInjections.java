@@ -5,19 +5,26 @@ import fr.groupbees.domain.TeamPlayerStatsDomainRepository;
 import fr.groupbees.domain.TeamPlayerStatsRawDatabaseConnector;
 import fr.groupbees.domain.service.TeamPlayerStatsService;
 import fr.groupbees.infrastructure.InfraDomainDatabaseConfig;
+import fr.groupbees.infrastructure.alloydb.TeamPlayerStatsRawAlloyDBAdapter;
+import fr.groupbees.infrastructure.alloydb.TeamPlayerStatsRawRepository;
 import fr.groupbees.infrastructure.bigquery.TeamPlayerStatsDomainBigQueryRepository;
-import fr.groupbees.infrastructure.inmemory.TeamPlayerStatsRawInMemoryAdapter;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableConfigurationProperties(InfraDomainDatabaseConfig.class)
+@ComponentScan(basePackages = "fr.groupbees.infrastructure.alloydb")
+@EntityScan(basePackages = "fr.groupbees.infrastructure.alloydb")
+@EnableJpaRepositories(basePackages = "fr.groupbees.infrastructure.alloydb")
 public class WorldCupInjections {
 
     @Bean
-    public TeamPlayerStatsRawDatabaseConnector statsRawDatabaseConnector() {
-        return new TeamPlayerStatsRawInMemoryAdapter();
+    public TeamPlayerStatsRawDatabaseConnector statsRawDatabaseConnector(TeamPlayerStatsRawRepository statsRawRepository) {
+        return new TeamPlayerStatsRawAlloyDBAdapter(statsRawRepository);
     }
 
     @Bean

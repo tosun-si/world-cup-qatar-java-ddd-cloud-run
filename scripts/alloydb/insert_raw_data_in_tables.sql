@@ -67,7 +67,7 @@ INSERT INTO fifa_ranking (fifa_ranking_id, ranking, team_id) VALUES
 (32,49,7);
 
 
-INSERT INTO team_player_stats_raw (team_id, fifa_ranking_id, nationalTeamKitSponsor, position, nationalTeamJerseyNumber, playerDob, club, playerName, appearances, goalsScored, assistsProvided, dribblesPerNinety, interceptionsPerNinety, tacklesPerNinety, totalDuelsWonPerNinety, savePercentage, cleanSheets, brandSponsorAndUsed) VALUES
+INSERT INTO team_player_stats_raw (team_id, fifa_ranking_id, national_team_kit_sponsor, position, national_team_jersey_number, player_dob, club, player_name, appearances, goals_scored, assists_provided, dribbles_per_ninety, interceptions_per_ninety, tackles_per_ninety, total_duels_won_per_ninety, save_percentage, clean_sheets, brand_sponsor_and_used) VALUES
 (18,10,'Adidas','GK','23','Sep 2, 1992','Aston Villa','Emiliano Martinez','7','0','0','0.00','0.00','0.00','0.65','46.67%','43%','Adidas'),
 (18,10,'Adidas','GK','1','Oct 16, 1986','River','Franco Armani','0','-','-','-','-','-','-','-','-','Nike'),
 (18,10,'Adidas','GK','12','May 20, 1992','Villarreal','Geronimo Rulli','0','-','-','-','-','-','-','-','-','Adidas'),

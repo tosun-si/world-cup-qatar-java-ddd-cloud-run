@@ -16,8 +16,32 @@ public class TeamPlayerStatsRawAlloyDBAdapter implements TeamPlayerStatsRawDatab
 
     @Override
     public List<TeamPlayerStatsRaw> findTeamPlayersStatsRaw() {
-        final List<TeamStatsRawEntity> teamStatsRawEntities = statsRawRepository.findTeamWithPlayersById();
+        return statsRawRepository.findTeamWithPlayersById()
+                .stream()
+                .map(this::toTeamStatsRaw)
+                .toList();
+    }
 
-        return null;
+    private TeamPlayerStatsRaw toTeamStatsRaw(TeamStatsRawEntity teamStatsRawEntity) {
+        return new TeamPlayerStatsRaw(
+                teamStatsRawEntity.getTeam().getTeam_name(),
+                teamStatsRawEntity.getFifaRanking().getRanking(),
+                teamStatsRawEntity.getNationalTeamKitSponsor(),
+                teamStatsRawEntity.getPosition(),
+                teamStatsRawEntity.getNationalTeamJerseyNumber(),
+                teamStatsRawEntity.getPlayerDob(),
+                teamStatsRawEntity.getClub(),
+                teamStatsRawEntity.getPlayerName(),
+                teamStatsRawEntity.getAppearances(),
+                teamStatsRawEntity.getGoalsScored(),
+                teamStatsRawEntity.getAssistsProvided(),
+                teamStatsRawEntity.getDribblesPerNinety(),
+                teamStatsRawEntity.getInterceptionsPerNinety(),
+                teamStatsRawEntity.getTacklesPerNinety(),
+                teamStatsRawEntity.getTotalDuelsWonPerNinety(),
+                teamStatsRawEntity.getSavePercentage(),
+                teamStatsRawEntity.getCleanSheets(),
+                teamStatsRawEntity.getBrandSponsorAndUsed()
+        );
     }
 }

@@ -4,9 +4,11 @@
                  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm orm_2_1.xsd"
                  version="2.1">
 
-    <named-query name="Team.findTeamPlayersStatsRaw">
+    <named-query name="TeamStatsRawEntity.findTeamPlayersStatsRaw">
         <query>
-            SELECT t FROM Team t JOIN FETCH t.players WHERE t.id = :id
+            SELECT t FROM TeamStatsRawEntity t
+            JOIN FETCH t.team
+            JOIN FETCH t.fifaRanking
         </query>
     </named-query>
 

@@ -1,37 +1,67 @@
 package fr.groupbees.infrastructure.alloydb.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-@Entity(name = "team_player_stats_raw")
+@Entity
+@Table(name = "team_player_stats_raw")
 public class TeamStatsRawEntity {
 
     @Id
-    @Column(name = "team_player_stat_id")
+    @Column(name = "team_player_stats_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer team_id;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id", referencedColumnName = "team_id")
+    private TeamEntity team;
 
-    private Integer fifa_ranking_id;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fifa_ranking_id", referencedColumnName = "fifa_ranking_id")
+    private FifaRankingEntity fifaRanking;
 
+    @Column(name = "national_team_kit_sponsor")
     private String nationalTeamKitSponsor;
 
     private String position;
 
+    @Column(name = "national_team_jersey_number")
     private Integer nationalTeamJerseyNumber;
+
+    @Column(name = "player_dob")
     private String playerDob;
+
     private String club;
+
+    @Column(name = "player_name")
     private String playerName;
+
     private String appearances;
+
+    @Column(name = "goals_scored")
     private String goalsScored;
+
+    @Column(name = "assists_provided")
     private String assistsProvided;
+
+    @Column(name = "dribbles_per_ninety")
     private String dribblesPerNinety;
+
+    @Column(name = "interceptions_per_ninety")
     private String interceptionsPerNinety;
+
+    @Column(name = "tackles_per_ninety")
     private String tacklesPerNinety;
+
+    @Column(name = "total_duels_won_per_ninety")
     private String totalDuelsWonPerNinety;
+
+    @Column(name = "save_percentage")
     private String savePercentage;
+
+    @Column(name = "clean_sheets")
     private String cleanSheets;
+
+    @Column(name = "brand_sponsor_and_used")
     private String brandSponsorAndUsed;
 
     public TeamStatsRawEntity() {
@@ -45,20 +75,20 @@ public class TeamStatsRawEntity {
         this.id = id;
     }
 
-    public Integer getTeam_id() {
-        return team_id;
+    public TeamEntity getTeam() {
+        return team;
     }
 
-    public void setTeam_id(Integer team_id) {
-        this.team_id = team_id;
+    public void setTeam(TeamEntity team) {
+        this.team = team;
     }
 
-    public Integer getFifa_ranking_id() {
-        return fifa_ranking_id;
+    public FifaRankingEntity getFifaRanking() {
+        return fifaRanking;
     }
 
-    public void setFifa_ranking_id(Integer fifa_ranking_id) {
-        this.fifa_ranking_id = fifa_ranking_id;
+    public void setFifaRanking(FifaRankingEntity fifaRanking) {
+        this.fifaRanking = fifaRanking;
     }
 
     public String getNationalTeamKitSponsor() {

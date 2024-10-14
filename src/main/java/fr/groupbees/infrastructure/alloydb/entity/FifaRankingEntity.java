@@ -3,8 +3,10 @@ package fr.groupbees.infrastructure.alloydb.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Entity(name = "team_player_stats_raw")
+@Entity
+@Table(name = "fifa_ranking")
 public class FifaRankingEntity {
 
     @Id

@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface TeamPlayerStatsRawRepository extends JpaRepository<TeamStatsRawEntity, Integer> {
 
-    @Query(name = "Team.findTeamWithPlayersById")
+    @Query(name = "TeamStatsRawEntity.findTeamPlayersStatsRaw")
     List<TeamStatsRawEntity> findTeamWithPlayersById();
 }
