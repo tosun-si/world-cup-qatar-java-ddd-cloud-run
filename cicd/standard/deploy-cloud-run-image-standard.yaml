@@ -1,0 +1,30 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    script: |
+      IMAGE_PATH="$LOCATION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$SERVICE_NAME_STANDARD:$IMAGE_TAG"
+      CACHE_IMAGE="$LOCATION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$SERVICE_NAME_STANDARD:cache"
+
+      # Try to pull the existing cache image, if it doesn't exist continue without failing
+      if ! docker pull "$CACHE_IMAGE"; then
+        echo "Cache image not found, continuing without cache."
+      fi
+
+      # Build the Docker image using the pulled cache (if available)
+      docker build \
+        -f cicd/standard/Dockerfile \
+        --cache-from "$CACHE_IMAGE" \
+        --tag "$SERVICE_NAME_STANDARD" .
+
+      docker tag "$SERVICE_NAME_STANDARD" "$IMAGE_PATH"
+
+      docker push "$IMAGE_PATH"
+
+      docker tag "$SERVICE_NAME_STANDARD" "$CACHE_IMAGE"
+      docker push "$CACHE_IMAGE"
+    env:
+      - 'PROJECT_ID=$PROJECT_ID'
+      - 'LOCATION=$LOCATION'
+      - 'REPO_NAME=$_REPO_NAME'
+      - 'SERVICE_NAME_STANDARD=$_SERVICE_NAME_STANDARD'
+      - 'IMAGE_TAG=$_IMAGE_TAG'
+      - 'SERVICE_ACCOUNT=$_SERVICE_ACCOUNT'

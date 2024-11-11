@@ -7,8 +7,12 @@
 /.dockerignore
 /.gitignore
 /.envrc
-/Dockerfile
-/deploy-app-cloud-run.yaml
+/cicd/standard/Dockerfile
+/cicd/standard/deploy-cloud-run-image-standard.yaml
+/cicd/standard/deploy-cloud-run-service-standard.yaml
+/cicd/native-graalvm/Dockerfileold
+/cicd/native-graalvm/deploy-cloud-run-image-graalvm.yaml
+/cicd/native-graalvm/deploy-cloud-run-service-standard.yaml
 /*.md
 /.idea
 *.iml

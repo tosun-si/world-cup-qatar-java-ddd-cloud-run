@@ -5,12 +5,17 @@ import fr.groupbees.domain.TeamPlayerStatsDomainObjects.TeamPlayerStats;
 import fr.groupbees.domain.TeamPlayerStatsDomainRepository;
 import fr.groupbees.infrastructure.InfraDomainDatabaseConfig;
 import fr.groupbees.infrastructure.JsonUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class TeamPlayerStatsDomainBigQueryRepository implements TeamPlayerStatsDomainRepository {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TeamPlayerStatsDomainBigQueryRepository.class);
 
     private final InfraDomainDatabaseConfig infraConfig;
 
@@ -48,13 +53,13 @@ public class TeamPlayerStatsDomainBigQueryRepository implements TeamPlayerStatsD
             );
 
             if (response.hasErrors()) {
-                for (Map.Entry<Long, List<BigQueryError>> entry : response.getInsertErrors().entrySet()) {
-                    System.out.println("Response error: \n" + entry.getValue());
+                for (Entry<Long, List<BigQueryError>> entry : response.getInsertErrors().entrySet()) {
+                    LOGGER.error("Response error: \n{}", entry.getValue());
                 }
             }
-            System.out.println("Rows successfully inserted into table");
+            LOGGER.info("Rows successfully inserted into table");
         } catch (BigQueryException e) {
-            System.out.println("Insert operation not performed \n" + e.toString());
+            LOGGER.error("Insert operation not performed \n{}", e.toString());
         }
     }
 }

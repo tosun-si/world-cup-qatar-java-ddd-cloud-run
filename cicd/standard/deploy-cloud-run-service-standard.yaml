@@ -1,0 +1,62 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    script: |
+      IMAGE_PATH="$LOCATION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$SERVICE_NAME_STANDARD:$IMAGE_TAG"
+      CACHE_IMAGE="$LOCATION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$SERVICE_NAME_STANDARD:cache"
+
+      # Try to pull the existing cache image, if it doesn't exist continue without failing
+      if ! docker pull "$CACHE_IMAGE"; then
+        echo "Cache image not found, continuing without cache."
+      fi
+
+      # Build the Docker image using the pulled cache (if available)
+      docker build \
+        -f cicd/standard/Dockerfile \
+        --cache-from "$CACHE_IMAGE" \
+        --tag "$SERVICE_NAME_STANDARD" .
+
+      docker tag "$SERVICE_NAME_STANDARD" "$IMAGE_PATH"
+
+      docker push "$IMAGE_PATH"
+
+      docker tag "$SERVICE_NAME_STANDARD" "$CACHE_IMAGE"
+      docker push "$CACHE_IMAGE"
+    env:
+      - 'PROJECT_ID=$PROJECT_ID'
+      - 'LOCATION=$LOCATION'
+      - 'REPO_NAME=$_REPO_NAME'
+      - 'SERVICE_NAME_STANDARD=$_SERVICE_NAME_STANDARD'
+      - 'IMAGE_TAG=$_IMAGE_TAG'
+      - 'SERVICE_ACCOUNT=$_SERVICE_ACCOUNT'
+  - name: google/cloud-sdk:496.0.0-slim
+    script: |
+      
+      ALLOY_DB_CLUSTER_NAME=$(gcloud secrets versions access latest --secret=world_cup_java_ddd_serverless_alloydb_cluster_name)
+      ALLOY_DB_INSTANCE_NAME=$(gcloud secrets versions access latest --secret=world_cup_java_ddd_serverless_alloydb_instance_name)
+      ALLOY_DB_USERNAME=$(gcloud secrets versions access latest --secret=world_cup_java_ddd_serverless_alloydb_username)
+      ALLOY_DB_PASSWORD=$(gcloud secrets versions access latest --secret=world_cup_java_ddd_serverless_alloydb_password)
+      
+      IMAGE_PATH="$LOCATION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$SERVICE_NAME_STANDARD:$IMAGE_TAG"
+      
+      gcloud run deploy "$SERVICE_NAME_STANDARD" \
+        --image "$IMAGE_PATH" \
+        --project="$PROJECT_ID" \
+        --region="$LOCATION" \
+        --service-account="$SERVICE_ACCOUNT" \
+        --vpc-connector=cloud-run-vpc-connector \
+        --vpc-egress private-ranges-only \
+        --set-env-vars PROJECT_ID="$PROJECT_ID" \
+        --set-env-vars LOCATION="$LOCATION" \
+        --set-env-vars ALLOY_DB_CLUSTER_NAME="$ALLOY_DB_CLUSTER_NAME"  \
+        --set-env-vars ALLOY_DB_INSTANCE_NAME="$ALLOY_DB_INSTANCE_NAME" \
+        --set-env-vars ALLOY_DB_USERNAME="$ALLOY_DB_USERNAME" \
+        --set-env-vars ALLOY_DB_PASSWORD="$ALLOY_DB_PASSWORD" \
+        --allow-unauthenticated
+    #          --no-allow-unauthenticated
+    env:
+      - 'PROJECT_ID=$PROJECT_ID'
+      - 'LOCATION=$LOCATION'
+      - 'REPO_NAME=$_REPO_NAME'
+      - 'SERVICE_NAME_STANDARD=$_SERVICE_NAME_STANDARD'
+      - 'IMAGE_TAG=$_IMAGE_TAG'
+      - 'SERVICE_ACCOUNT=$_SERVICE_ACCOUNT'

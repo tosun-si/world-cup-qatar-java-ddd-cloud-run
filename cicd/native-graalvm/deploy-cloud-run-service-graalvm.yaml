@@ -1,0 +1,33 @@
+steps:
+  - name: google/cloud-sdk:496.0.0-slim
+    script: |
+      
+      ALLOY_DB_CLUSTER_NAME=$(gcloud secrets versions access latest --secret=world_cup_java_ddd_serverless_alloydb_cluster_name)
+      ALLOY_DB_INSTANCE_NAME=$(gcloud secrets versions access latest --secret=world_cup_java_ddd_serverless_alloydb_instance_name)
+      ALLOY_DB_USERNAME=$(gcloud secrets versions access latest --secret=world_cup_java_ddd_serverless_alloydb_username)
+      ALLOY_DB_PASSWORD=$(gcloud secrets versions access latest --secret=world_cup_java_ddd_serverless_alloydb_password)
+      
+      IMAGE_PATH="$LOCATION-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$SERVICE_NAME_NATIVE_GRAAL_VM:$IMAGE_TAG"
+      
+      gcloud run deploy "$SERVICE_NAME_NATIVE_GRAAL_VM" \
+        --image "$IMAGE_PATH" \
+        --project="$PROJECT_ID" \
+        --region="$LOCATION" \
+        --service-account="$SERVICE_ACCOUNT" \
+        --vpc-connector=cloud-run-vpc-connector \
+        --vpc-egress private-ranges-only \
+        --set-env-vars PROJECT_ID="$PROJECT_ID" \
+        --set-env-vars LOCATION="$LOCATION" \
+        --set-env-vars ALLOY_DB_CLUSTER_NAME="$ALLOY_DB_CLUSTER_NAME"  \
+        --set-env-vars ALLOY_DB_INSTANCE_NAME="$ALLOY_DB_INSTANCE_NAME" \
+        --set-env-vars ALLOY_DB_USERNAME="$ALLOY_DB_USERNAME" \
+        --set-env-vars ALLOY_DB_PASSWORD="$ALLOY_DB_PASSWORD" \
+        --allow-unauthenticated
+    #          --no-allow-unauthenticated
+    env:
+      - 'PROJECT_ID=$PROJECT_ID'
+      - 'LOCATION=$LOCATION'
+      - 'REPO_NAME=$_REPO_NAME'
+      - 'SERVICE_NAME_NATIVE_GRAAL_VM=$_SERVICE_NAME_NATIVE_GRAAL_VM'
+      - 'IMAGE_TAG=$_IMAGE_TAG'
+      - 'SERVICE_ACCOUNT=$_SERVICE_ACCOUNT'

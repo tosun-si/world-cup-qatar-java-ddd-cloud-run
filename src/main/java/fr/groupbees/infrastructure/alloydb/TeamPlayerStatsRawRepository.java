@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface TeamPlayerStatsRawRepository extends JpaRepository<TeamStatsRawEntity, Integer> {
 
-    @Query(name = "TeamStatsRawEntity.findTeamPlayersStatsRaw")
+//    @Query(name = "TeamStatsRawEntity.findTeamPlayersStatsRaw")
+
+    @Query("SELECT t FROM TeamStatsRawEntity t JOIN FETCH t.team JOIN FETCH t.fifaRanking")
     List<TeamStatsRawEntity> findTeamWithPlayersById();
 }
