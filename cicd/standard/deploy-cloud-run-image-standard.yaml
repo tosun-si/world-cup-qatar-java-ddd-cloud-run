@@ -1,3 +1,7 @@
+options:
+  volumes:
+    - name: "maven-cache"
+      path: "/root/.m2"
 steps:
   - name: 'gcr.io/cloud-builders/docker'
     script: |

@@ -18,10 +18,6 @@ COPY pom.xml ./
 
 RUN mvn dependency:resolve dependency:resolve-plugins -B
 
-# Copy the cached .m2 directory from Cloud Build or local machine
-#ARG CACHE_DIR=/workspace/.m2
-#COPY $CACHE_DIR /root/.m2
-
 COPY src ./src
 COPY .mvn .mvn
 COPY mvnw .
