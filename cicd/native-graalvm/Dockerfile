@@ -6,7 +6,6 @@ ENV MAVEN_VERSION=3.9.9
 ENV MAVEN_HOME=/opt/maven
 ENV PATH=$MAVEN_HOME/bin:$PATH
 
-# Install wget and unzip
 RUN mkdir -p ${MAVEN_HOME} && \
     curl -L -o apache-maven-${MAVEN_VERSION}-bin.tar.gz https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
     echo "Download completed, now extracting..." && \
