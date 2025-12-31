@@ -5,9 +5,9 @@ import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.FirestoreOptions;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
-import fr.groupbees.domain.TeamPlayerStatsRaw;
-import fr.groupbees.domain.TeamPlayerStatsRawDatabaseConnector;
-import fr.groupbees.infrastructure.InfraRawDatabaseConfig;
+import fr.groupbees.domain.model.TeamPlayerStatsRaw;
+import fr.groupbees.application.port.TeamPlayerStatsRawRepository;
+import fr.groupbees.infrastructure.config.InfraRawDatabaseConfig;
 import io.vavr.control.Try;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 
-public class TeamPlayerStatsRawFirestoreAdapter implements TeamPlayerStatsRawDatabaseConnector {
+public class TeamPlayerStatsRawFirestoreAdapter implements TeamPlayerStatsRawRepository {
 
     private static final String ERROR_MESSAGE_GET_STATS_FIRESTORE = "Error when trying to retrieve the collection of team player stats raw from Firestore";
 
@@ -26,7 +26,7 @@ public class TeamPlayerStatsRawFirestoreAdapter implements TeamPlayerStatsRawDat
     }
 
     @Override
-    public List<TeamPlayerStatsRaw> findTeamPlayersStatsRaw() {
+    public List<TeamPlayerStatsRaw> find() {
         Firestore db = FirestoreOptions.getDefaultInstance().getService();
         ApiFuture<QuerySnapshot> query = db.collection(infraRawDatabaseConfig.firestoreCollectionName()).get();
 

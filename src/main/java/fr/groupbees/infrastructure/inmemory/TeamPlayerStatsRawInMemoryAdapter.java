@@ -1,16 +1,16 @@
 package fr.groupbees.infrastructure.inmemory;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import fr.groupbees.domain.TeamPlayerStatsRaw;
-import fr.groupbees.domain.TeamPlayerStatsRawDatabaseConnector;
-import fr.groupbees.infrastructure.JsonUtil;
+import fr.groupbees.domain.model.TeamPlayerStatsRaw;
+import fr.groupbees.application.port.TeamPlayerStatsRawRepository;
+import fr.groupbees.infrastructure.serialization.JsonUtil;
 
 import java.util.List;
 
-public class TeamPlayerStatsRawInMemoryAdapter implements TeamPlayerStatsRawDatabaseConnector {
+public class TeamPlayerStatsRawInMemoryAdapter implements TeamPlayerStatsRawRepository {
 
     @Override
-    public List<TeamPlayerStatsRaw> findTeamPlayersStatsRaw() {
+    public List<TeamPlayerStatsRaw> find() {
         var ref = new TypeReference<List<TeamPlayerStatsRaw>>() {
         };
 

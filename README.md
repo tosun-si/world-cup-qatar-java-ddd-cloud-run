@@ -1,6 +1,91 @@
 # world-cup-qatar-java-ddd-cloud-run
 
-Real World use case with an application using DDD and use Serverless deployment with Cloud Run and GCP.
+Real World use case with an application using DDD and Clean Architecture, deployed as a Serverless application on 
+Cloud Run (GCP) with GraalVM native compilation for improved cold start performance.
+
+## Use Case
+
+This application processes FIFA World Cup Qatar 2022 team player statistics:
+1. **Read** raw player statistics from a data source (Firestore or AlloyDB)
+2. **Transform** raw data into domain projections (aggregated team statistics)
+3. **Store** the projections in BigQuery for querying
+
+## DDD and Clean Architecture
+
+### Project Structure
+
+```
+src/main/java/fr/groupbees/
+├── domain/                    # Domain Layer - Business logic
+│   ├── model/                 # Domain objects (TeamPlayerStats, TeamPlayerStatsRaw)
+│   └── service/               # Domain services (TeamPlayerStatsService)
+├── application/               # Application Layer - Use cases
+│   ├── usecase/               # Application services (GetTeamPlayerStatsRawUseCase, etc.)
+│   └── port/                  # Ports (interfaces for external dependencies)
+└── infrastructure/            # Infrastructure Layer - External concerns
+    ├── web/                   # REST controllers
+    ├── firestore/             # Firestore adapter
+    ├── alloydb/               # AlloyDB adapter
+    ├── bigquery/              # BigQuery adapter
+    ├── inmemory/              # In-memory adapter (for tests)
+    └── config/                # Spring configuration
+```
+
+### DDD Concepts Used
+
+| Concept | Implementation | Purpose |
+|---------|---------------|---------|
+| **Layered Architecture** | `domain/`, `application/`, `infrastructure/` | Clear separation of concerns |
+| **Hexagonal Architecture** | Ports in `application/port/`, Adapters in `infrastructure/` | Decouple domain from external systems |
+| **Domain Service** | `TeamPlayerStatsService` | Stateless domain logic (raw to domain transformation) |
+| **Use Cases** | `GetTeamPlayerStatsRawUseCase`, `SaveTeamPlayerStatsDomainUseCase` | Orchestrate domain operations |
+| **Repository Pattern** | `TeamPlayerStatsRawRepository`, `TeamPlayerStatsRepository` | Abstract data access |
+| **Value Object** | `TeamPlayerStatsRaw` | Immutable data from external source |
+| **Projection** | `TeamPlayerStats` | Computed domain object for querying |
+
+### Architecture Decisions
+
+- **No Aggregates**: This domain is transformation/query-focused, not write-heavy with complex invariants. Aggregates are not force-fitted where they don't add value.
+- **Adapter Flexibility**: The hexagonal architecture allows swapping data sources (Firestore, AlloyDB, In-memory) without changing domain or application logic.
+- **Testability**: Tests use in-memory adapters, running without external dependencies.
+
+## Run locally
+
+### With standard Spring Boot and Java
+
+Build the application:
+
+```bash
+./mvnw clean package
+```
+
+Run the application:
+
+```bash
+./mvnw spring-boot:run
+```
+
+Or run the JAR directly:
+
+```bash
+java -jar target/world-cup-qatar-java-ddd-cloud-run-0.0.1-SNAPSHOT.jar
+```
+
+### With GraalVM native image
+
+Build the native image (requires GraalVM installed):
+
+```bash
+./mvnw -Pnative native:compile
+```
+
+Run the native executable:
+
+```bash
+./target/world-cup-qatar-java-ddd-cloud-run
+```
+
+## AlloyDB firewall rule
 
 ```bash
 gcloud compute firewall-rules create allow-alloydb-ingress-serverless \
@@ -57,7 +142,25 @@ docker run -it \
     $SERVICE_NAME_STANDARD
 ```
 
+## Create the AlloyDB instance with Terraform
+
+```bash
+gcloud builds submit \
+  --project=$PROJECT_ID \
+  --region=$LOCATION \
+  --config cicd/create-alloydb-cluster-terraform-apply.yaml \
+  --substitutions _TF_STATE_BUCKET=$TF_STATE_BUCKET,_TF_STATE_PREFIX=$TF_STATE_PREFIX,_GOOGLE_PROVIDER_VERSION=$GOOGLE_PROVIDER_VERSION \
+  --verbosity="debug" .
+```
+
 ## Deploy the app in Cloud Run with native compilation and GraalVM
+
+This project uses a custom Dockerfile instead of Spring Boot Buildpacks for native image builds. This approach provides more control and flexibility over the build process, allowing proper Docker layer caching to optimize build time with Cloud Build.
+
+As an alternative, Spring Boot Buildpacks can build a native image with:
+```bash
+./mvnw spring-boot:build-image -Pnative -Dspring-boot.build-image.imageName=myapp
+```
 
 Deploy the Image
 
@@ -66,7 +169,7 @@ gcloud builds submit \
     --project=$PROJECT_ID \
     --region=global \
     --config cicd/native-graalvm/deploy-cloud-run-image-graalvm.yaml \
-    --substitutions _REPO_NAME="$REPO_NAME",_SERVICE_NAME_NATIVE_GRAAL_VM="$SERVICE_NAME_NATIVE_GRAAL_VM",_IMAGE_TAG="$IMAGE_TAG",_SERVICE_ACCOUNT="$SERVICE_ACCOUNT" \
+    --substitutions _REPO_NAME="$REPO_NAME",_SERVICE_NAME_NATIVE_GRAAL_VM="$SERVICE_NAME_NATIVE_GRAAL_VM",_IMAGE_TAG="$IMAGE_TAG" \
     --verbosity="debug" .
 ```
 
@@ -83,8 +186,7 @@ gcloud builds submit \
 
 With Docker
 
-
-Build
+Build (requires Docker Desktop memory set to 12-16GB in Settings → Resources)
 
 ```bash
 docker build -f cicd/native-graalvm/Dockerfile -t $SERVICE_NAME_NATIVE_GRAAL_VM .

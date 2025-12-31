@@ -1,22 +1,22 @@
 package fr.groupbees.infrastructure.alloydb;
 
-import fr.groupbees.domain.TeamPlayerStatsRaw;
-import fr.groupbees.domain.TeamPlayerStatsRawDatabaseConnector;
+import fr.groupbees.domain.model.TeamPlayerStatsRaw;
+import fr.groupbees.application.port.TeamPlayerStatsRawRepository;
 import fr.groupbees.infrastructure.alloydb.entity.TeamStatsRawEntity;
 
 import java.util.List;
 
-public class TeamPlayerStatsRawAlloyDBAdapter implements TeamPlayerStatsRawDatabaseConnector {
+public class TeamPlayerStatsRawAlloyDBAdapter implements TeamPlayerStatsRawRepository {
 
-    private final TeamPlayerStatsRawRepository statsRawRepository;
+    private final TeamPlayerStatsRawJpaRepository statsRawJpaRepository;
 
-    public TeamPlayerStatsRawAlloyDBAdapter(TeamPlayerStatsRawRepository statsRawRepository) {
-        this.statsRawRepository = statsRawRepository;
+    public TeamPlayerStatsRawAlloyDBAdapter(TeamPlayerStatsRawJpaRepository statsRawJpaRepository) {
+        this.statsRawJpaRepository = statsRawJpaRepository;
     }
 
     @Override
-    public List<TeamPlayerStatsRaw> findTeamPlayersStatsRaw() {
-        return statsRawRepository.findTeamWithPlayersById()
+    public List<TeamPlayerStatsRaw> find() {
+        return statsRawJpaRepository.findTeamWithPlayersById()
                 .stream()
                 .map(this::toTeamStatsRaw)
                 .toList();

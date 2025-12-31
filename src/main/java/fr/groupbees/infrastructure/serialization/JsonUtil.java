@@ -1,4 +1,4 @@
-package fr.groupbees.infrastructure;
+package fr.groupbees.infrastructure.serialization;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;

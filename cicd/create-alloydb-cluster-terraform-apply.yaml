@@ -1,0 +1,19 @@
+steps:
+  - name: alpine/terragrunt:1.6.5
+    script: |
+      terragrunt run-all init
+      terragrunt run-all plan --out tfplan.out
+      terragrunt run-all apply --terragrunt-non-interactive tfplan.out
+    dir: 'infra'
+    env:
+      - 'TF_VAR_project_id=$PROJECT_ID'
+      - 'TF_VAR_location=$LOCATION'
+      - 'TF_STATE_BUCKET=$_TF_STATE_BUCKET'
+      - 'TF_STATE_PREFIX=$_TF_STATE_PREFIX'
+      - 'GOOGLE_PROVIDER_VERSION=$_GOOGLE_PROVIDER_VERSION'
+  - name: alpine:latest
+    args:
+      - '-ec'
+      - |
+        ./scripts/alloydb/create_raw_tables.sql \
+        && ./scripts/alloydb/insert_raw_data_in_tables.sql
