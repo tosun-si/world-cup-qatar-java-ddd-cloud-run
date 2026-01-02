@@ -37,6 +37,7 @@
         <vavr.version>0.10.4</vavr.version>
         <apache.commons.lang3.version>3.17.0</apache.commons.lang3.version>
         <jackson.databind.version>2.18.0</jackson.databind.version>
+        <json-unit.version>3.4.1</json-unit.version>
     </properties>
 
     <dependencyManagement>
@@ -106,6 +107,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.javacrumbs.json-unit</groupId>
+            <artifactId>json-unit-assertj</artifactId>
+            <version>${json-unit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

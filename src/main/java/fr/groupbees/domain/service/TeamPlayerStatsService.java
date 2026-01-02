@@ -114,10 +114,10 @@ public class TeamPlayerStatsService {
 
         var goalKeeperStats = new GoalkeeperStats(
                 currentGoalKeeperStats.playerName(),
-                currentGoalKeeperStats.club(),
                 currentGoalKeeperStats.appearances(),
                 currentGoalKeeperStats.savePercentage(),
-                currentGoalKeeperStats.cleanSheets()
+                currentGoalKeeperStats.cleanSheets(),
+                currentGoalKeeperStats.club()
         );
 
         var currentTeam = teamPlayersStatsRaw
