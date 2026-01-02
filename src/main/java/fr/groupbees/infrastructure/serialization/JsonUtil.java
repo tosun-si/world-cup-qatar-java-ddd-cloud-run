@@ -45,7 +45,7 @@ public class JsonUtil {
         try {
             return OBJECT_MAPPER.readValue(stream, reference);
         } catch (Exception e) {
-            throw new IllegalStateException("The deserialization of inputStream for the following reference type " + reference);
+            throw new IllegalStateException("The deserialization of inputStream for the following reference type " + reference + ". Cause: " + e.getMessage(), e);
         }
     }
 }

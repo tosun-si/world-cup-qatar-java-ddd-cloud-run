@@ -49,6 +49,30 @@ src/main/java/fr/groupbees/
 - **Adapter Flexibility**: The hexagonal architecture allows swapping data sources (Firestore, AlloyDB, In-memory) without changing domain or application logic.
 - **Testability**: Tests use in-memory adapters, running without external dependencies.
 
+### Business Rules in Domain Model
+
+The `TeamPlayerStats` projection contains encapsulated business logic:
+
+| Method | Description | Return Type |
+|--------|-------------|-------------|
+| `getPerformanceRating()` | Calculates team performance score (0-100) based on weighted offensive and defensive stats | `Integer` |
+| `getTeamStyle()` | Classifies team playing style based on offensive vs defensive stats ratio | `OFFENSIVE`, `BALANCED`, `DEFENSIVE` |
+| `getGoalkeeperReliability()` | Evaluates goalkeeper based on save percentage | `ELITE`, `RELIABLE`, `AVERAGE` |
+| `getStarPlayersStats()` | Returns star players (appearing in multiple categories) with their category details | `StarPlayersStats` |
+
+Example output for `getStarPlayersStats()`:
+```
+StarPlayersStats(
+  starPlayers: [
+    StarPlayerDetail(playerName: "Lionel Messi", categories: ["Top Scorers", "Best Passers"]),
+    StarPlayerDetail(playerName: "N'Golo Kante", categories: ["Most Appearances", "Most Duels Won", "Most Successful Tackles"])
+  ],
+  totalCount: 2
+)
+```
+
+These methods demonstrate domain logic encapsulated within the domain model, following DDD principles.
+
 ## Run locally
 
 ### With standard Spring Boot and Java
@@ -167,7 +191,7 @@ Deploy the Image
 ```bash
 gcloud builds submit \
     --project=$PROJECT_ID \
-    --region=global \
+    --region=$LOCATION \
     --config cicd/native-graalvm/deploy-cloud-run-image-graalvm.yaml \
     --substitutions _REPO_NAME="$REPO_NAME",_SERVICE_NAME_NATIVE_GRAAL_VM="$SERVICE_NAME_NATIVE_GRAAL_VM",_IMAGE_TAG="$IMAGE_TAG" \
     --verbosity="debug" .

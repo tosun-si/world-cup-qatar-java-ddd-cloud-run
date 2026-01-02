@@ -12,7 +12,7 @@ steps:
         
         IMAGE_PATH="$LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/$_SERVICE_NAME_NATIVE_GRAAL_VM:$_IMAGE_TAG"
         CACHE_IMAGE="$LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/$_SERVICE_NAME_NATIVE_GRAAL_VM:cache"
-
+        
         docker buildx build \
           -f cicd/native-graalvm/Dockerfile \
           -t $$IMAGE_PATH \
