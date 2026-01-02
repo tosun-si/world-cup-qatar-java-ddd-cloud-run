@@ -119,6 +119,50 @@ gcloud compute firewall-rules create allow-alloydb-ingress-serverless \
     --description "Allow VPC connector traffic to AlloyDB for Serverless Components"
 ```
 
+## Deployment Strategy: Standard JVM vs GraalVM Native
+
+This application can be deployed with two approaches to compare their characteristics:
+
+| Aspect | Standard JVM | GraalVM Native |
+|--------|--------------|----------------|
+| **Cold Start** | Slower (JVM startup + class loading) | Much faster (native executable) |
+| **Memory Usage** | Higher (JVM overhead) | Lower (no JVM) |
+| **Build Time** | Fast | Slower (AOT compilation) |
+| **Peak Performance** | Better (JIT optimizations) | Good (but no runtime optimizations) |
+| **Image Size** | Larger (~200-300MB) | Smaller (~50-100MB) |
+
+### Why GraalVM for Serverless?
+
+In serverless environments like Cloud Run, **cold starts** are critical because:
+- Instances scale to zero when idle
+- New instances must start quickly to handle incoming requests
+- Users experience latency during cold starts
+
+GraalVM native compilation addresses this by:
+1. **Ahead-of-Time (AOT) compilation**: Code is compiled to native machine code at build time, not runtime
+2. **No JVM startup**: The executable runs directly without JVM initialization
+3. **Reduced memory footprint**: No need to load JVM classes and metadata
+4. **Instant startup**: Application is ready in milliseconds instead of seconds
+
+### Spring AOT: Simplifying GraalVM with Spring Boot
+
+GraalVM native-image requires all classes and methods to be known at build time (closed-world assumption). This is challenging for Spring Boot, which heavily uses reflection, dynamic proxies, and runtime configuration.
+
+**Spring AOT (Ahead-of-Time) processing** solves this by analyzing the application at build time and generating:
+- **Reflection hints**: Classes that need reflection access
+- **Proxy hints**: Interfaces requiring dynamic proxies
+- **Resource hints**: Files to include in the native image
+- **Serialization hints**: Classes needing serialization support
+
+These hints are generated in `META-INF/native-image/` and tell GraalVM exactly what to include.
+
+To enable Spring AOT, simply use the `native` Maven profile:
+```bash
+./mvnw -Pnative native:compile
+```
+
+This dramatically simplifies GraalVM adoption - no manual configuration of reflection or resources needed.
+
 ## Deploy the app in Cloud Run with the standard way
 
 Deploy the image
@@ -179,7 +223,30 @@ gcloud builds submit \
 
 ## Deploy the app in Cloud Run with native compilation and GraalVM
 
-This project uses a custom Dockerfile instead of Spring Boot Buildpacks for native image builds. This approach provides more control and flexibility over the build process, allowing proper Docker layer caching to optimize build time with Cloud Build.
+### Why a Custom Dockerfile?
+
+This project uses a custom Dockerfile instead of Spring Boot Buildpacks for native image builds. This approach provides several advantages:
+
+| Benefit | Description |
+|---------|-------------|
+| **Docker layer caching** | Separates dependency download from compilation, optimizing build time with Cloud Build |
+| **Multi-stage builds** | Produces smaller final images by excluding build tools and intermediate files |
+| **Improved security** | Minimal final image with only the native executable, reducing attack surface |
+| **Faster cold starts** | Smaller images load faster when Cloud Run scales up new instances |
+
+#### Multi-Stage Build Strategy
+
+```dockerfile
+# Stage 1: Build (large image with GraalVM, Maven, dependencies)
+FROM ghcr.io/graalvm/native-image:... AS builder
+# Download dependencies (cached layer)
+# Compile native image
+
+# Stage 2: Runtime (minimal image with only the executable)
+FROM debian:bookworm-slim
+COPY --from=builder /app/target/myapp /app
+# Final image: ~50-100MB instead of ~1GB+
+```
 
 As an alternative, Spring Boot Buildpacks can build a native image with:
 ```bash
