@@ -1,0 +1,138 @@
+{
+  "teamName": "France",
+  "teamTotalGoals": 6,
+  "nationalTeamKitSponsor": "Nike",
+  "performanceRating": 53,
+  "teamStyle": "BALANCED",
+  "goalkeeperReliability": "ELITE",
+  "topScorers": {
+    "players": [
+      {
+        "playerName": "Kylian Mbappe",
+        "playerDob": "Dec 20, 1998",
+        "position": "FW",
+        "club": "Paris Saint-Germain",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "goals": 4
+  },
+  "bestPassers": {
+    "players": [
+      {
+        "playerName": "Antoine Griezmann",
+        "playerDob": "Mar 21, 1991",
+        "position": "FW",
+        "club": "Atletico Madrid",
+        "brandSponsorAndUsed": "Puma",
+        "appearances": 5
+      }
+    ],
+    "goalAssists": 3
+  },
+  "bestDribblers": {
+    "players": [
+      {
+        "playerName": "Kylian Mbappe",
+        "playerDob": "Dec 20, 1998",
+        "position": "FW",
+        "club": "Paris Saint-Germain",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "dribbles": 3.5
+  },
+  "goalKeeper": {
+    "playerName": "Hugo Lloris",
+    "appearances": "5",
+    "savePercentage": "82%",
+    "cleanSheets": "2",
+    "club": "Tottenham Hotspur"
+  },
+  "playersMostAppearances": {
+    "players": [
+      {
+        "playerName": "Kylian Mbappe",
+        "playerDob": "Dec 20, 1998",
+        "position": "FW",
+        "club": "Paris Saint-Germain",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      },
+      {
+        "playerName": "Antoine Griezmann",
+        "playerDob": "Mar 21, 1991",
+        "position": "FW",
+        "club": "Atletico Madrid",
+        "brandSponsorAndUsed": "Puma",
+        "appearances": 5
+      },
+      {
+        "playerName": "Hugo Lloris",
+        "playerDob": "Dec 19, 1986",
+        "position": "GK",
+        "club": "Tottenham Hotspur",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "appearances": 5
+  },
+  "playersMostDuelsWon": {
+    "players": [
+      {
+        "playerName": "N'Golo Kante",
+        "playerDob": "Mar 29, 1991",
+        "position": "MF",
+        "club": "Chelsea",
+        "brandSponsorAndUsed": "Adidas",
+        "appearances": 4
+      }
+    ],
+    "duels": 5.2
+  },
+  "playersMostInterception": {
+    "players": [
+      {
+        "playerName": "N'Golo Kante",
+        "playerDob": "Mar 29, 1991",
+        "position": "MF",
+        "club": "Chelsea",
+        "brandSponsorAndUsed": "Adidas",
+        "appearances": 4
+      }
+    ],
+    "interceptions": 2.8
+  },
+  "playersMostSuccessfulTackles": {
+    "players": [
+      {
+        "playerName": "N'Golo Kante",
+        "playerDob": "Mar 29, 1991",
+        "position": "MF",
+        "club": "Chelsea",
+        "brandSponsorAndUsed": "Adidas",
+        "appearances": 4
+      }
+    ],
+    "successfulTackles": 3.5
+  },
+  "starPlayersStats": {
+    "starPlayers": [
+      {
+        "playerName": "Kylian Mbappe",
+        "categories": ["TOP_SCORERS", "BEST_DRIBBLERS", "MOST_APPEARANCES"]
+      },
+      {
+        "playerName": "N'Golo Kante",
+        "categories": ["MOST_DUELS_WON", "MOST_INTERCEPTIONS", "MOST_SUCCESSFUL_TACKLES"]
+      },
+      {
+        "playerName": "Antoine Griezmann",
+        "categories": ["BEST_PASSERS", "MOST_APPEARANCES"]
+      }
+    ]
+  }
+}

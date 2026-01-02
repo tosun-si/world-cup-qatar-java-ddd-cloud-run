@@ -1,0 +1,126 @@
+{
+  "teamName": "Argentina",
+  "teamTotalGoals": 9,
+  "nationalTeamKitSponsor": "Adidas",
+  "performanceRating": 72,
+  "teamStyle": "OFFENSIVE",
+  "goalkeeperReliability": "RELIABLE",
+  "topScorers": {
+    "players": [
+      {
+        "playerName": "Lionel Messi",
+        "playerDob": "Jun 24, 1987",
+        "position": "FW",
+        "club": "Paris Saint-Germain",
+        "brandSponsorAndUsed": "Adidas",
+        "appearances": 7
+      }
+    ],
+    "goals": 7
+  },
+  "bestPassers": {
+    "players": [
+      {
+        "playerName": "Lionel Messi",
+        "playerDob": "Jun 24, 1987",
+        "position": "FW",
+        "club": "Paris Saint-Germain",
+        "brandSponsorAndUsed": "Adidas",
+        "appearances": 7
+      }
+    ],
+    "goalAssists": 3
+  },
+  "bestDribblers": {
+    "players": [
+      {
+        "playerName": "Lionel Messi",
+        "playerDob": "Jun 24, 1987",
+        "position": "FW",
+        "club": "Paris Saint-Germain",
+        "brandSponsorAndUsed": "Adidas",
+        "appearances": 7
+      }
+    ],
+    "dribbles": 4.2
+  },
+  "goalKeeper": {
+    "playerName": "Emiliano Martinez",
+    "appearances": "7",
+    "savePercentage": "78%",
+    "cleanSheets": "4",
+    "club": "Aston Villa"
+  },
+  "playersMostAppearances": {
+    "players": [
+      {
+        "playerName": "Lionel Messi",
+        "playerDob": "Jun 24, 1987",
+        "position": "FW",
+        "club": "Paris Saint-Germain",
+        "brandSponsorAndUsed": "Adidas",
+        "appearances": 7
+      },
+      {
+        "playerName": "Emiliano Martinez",
+        "playerDob": "Sep 2, 1987",
+        "position": "GK",
+        "club": "Aston Villa",
+        "brandSponsorAndUsed": "Adidas",
+        "appearances": 7
+      }
+    ],
+    "appearances": 7
+  },
+  "playersMostDuelsWon": {
+    "players": [
+      {
+        "playerName": "Lionel Messi",
+        "playerDob": "Jun 24, 1987",
+        "position": "FW",
+        "club": "Paris Saint-Germain",
+        "brandSponsorAndUsed": "Adidas",
+        "appearances": 7
+      }
+    ],
+    "duels": 3.8
+  },
+  "playersMostInterception": {
+    "players": [
+      {
+        "playerName": "Angel Di Maria",
+        "playerDob": "Jan 22, 1988",
+        "position": "FW",
+        "club": "Benfica",
+        "brandSponsorAndUsed": "Adidas",
+        "appearances": 6
+      }
+    ],
+    "interceptions": 0.4
+  },
+  "playersMostSuccessfulTackles": {
+    "players": [
+      {
+        "playerName": "Angel Di Maria",
+        "playerDob": "Jan 22, 1988",
+        "position": "FW",
+        "club": "Benfica",
+        "brandSponsorAndUsed": "Adidas",
+        "appearances": 6
+      }
+    ],
+    "successfulTackles": 0.5
+  },
+  "starPlayersStats": {
+    "starPlayers": [
+      {
+        "playerName": "Angel Di Maria",
+        "categories": ["MOST_INTERCEPTIONS", "MOST_SUCCESSFUL_TACKLES"]
+      },
+      {
+        "playerName": "Lionel Messi",
+        "categories": ["TOP_SCORERS", "BEST_PASSERS", "BEST_DRIBBLERS", "MOST_APPEARANCES", "MOST_DUELS_WON"]
+      }
+    ]
+  }
+}
