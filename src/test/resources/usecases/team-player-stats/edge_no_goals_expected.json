@@ -1,0 +1,125 @@
+{
+  "teamName": "Morocco",
+  "teamTotalGoals": 0,
+  "nationalTeamKitSponsor": "Puma",
+  "performanceRating": 11,
+  "teamStyle": "DEFENSIVE",
+  "goalkeeperReliability": "ELITE",
+  "topScorers": {
+    "players": [],
+    "goals": 0
+  },
+  "bestPassers": {
+    "players": [
+      {
+        "playerName": "Achraf Hakimi",
+        "playerDob": "Nov 14, 1994",
+        "position": "DF",
+        "club": "Paris Saint-Germain",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 4
+      }
+    ],
+    "goalAssists": 2
+  },
+  "bestDribblers": {
+    "players": [
+      {
+        "playerName": "Achraf Hakimi",
+        "playerDob": "Nov 14, 1994",
+        "position": "DF",
+        "club": "Paris Saint-Germain",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 4
+      }
+    ],
+    "dribbles": 1.8
+  },
+  "goalKeeper": {
+    "playerName": "Yassine Bounou",
+    "appearances": "4",
+    "savePercentage": "89%",
+    "cleanSheets": "3",
+    "club": "Sevilla"
+  },
+  "playersMostAppearances": {
+    "players": [
+      {
+        "playerName": "Achraf Hakimi",
+        "playerDob": "Nov 14, 1994",
+        "position": "DF",
+        "club": "Paris Saint-Germain",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 4
+      },
+      {
+        "playerName": "Sofyan Amrabat",
+        "playerDob": "Feb 10, 1997",
+        "position": "MF",
+        "club": "Fiorentina",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 4
+      },
+      {
+        "playerName": "Yassine Bounou",
+        "playerDob": "Nov 5, 1995",
+        "position": "GK",
+        "club": "Sevilla",
+        "brandSponsorAndUsed": "Puma",
+        "appearances": 4
+      }
+    ],
+    "appearances": 4
+  },
+  "playersMostDuelsWon": {
+    "players": [
+      {
+        "playerName": "Sofyan Amrabat",
+        "playerDob": "Feb 10, 1997",
+        "position": "MF",
+        "club": "Fiorentina",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 4
+      }
+    ],
+    "duels": 6.2
+  },
+  "playersMostInterception": {
+    "players": [
+      {
+        "playerName": "Sofyan Amrabat",
+        "playerDob": "Feb 10, 1997",
+        "position": "MF",
+        "club": "Fiorentina",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 4
+      }
+    ],
+    "interceptions": 3.1
+  },
+  "playersMostSuccessfulTackles": {
+    "players": [
+      {
+        "playerName": "Sofyan Amrabat",
+        "playerDob": "Feb 10, 1997",
+        "position": "MF",
+        "club": "Fiorentina",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 4
+      }
+    ],
+    "successfulTackles": 4.0
+  },
+  "starPlayersStats": {
+    "starPlayers": [
+      {
+        "playerName": "Achraf Hakimi",
+        "categories": ["BEST_PASSERS", "BEST_DRIBBLERS", "MOST_APPEARANCES"]
+      },
+      {
+        "playerName": "Sofyan Amrabat",
+        "categories": ["MOST_APPEARANCES", "MOST_DUELS_WON", "MOST_INTERCEPTIONS", "MOST_SUCCESSFUL_TACKLES"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "teamName": "Brazil",
+  "teamTotalGoals": 9,
+  "nationalTeamKitSponsor": "Nike",
+  "performanceRating": 58,
+  "teamStyle": "OFFENSIVE",
+  "goalkeeperReliability": "ELITE",
+  "topScorers": {
+    "players": [
+      {
+        "playerName": "Vinicius Junior",
+        "playerDob": "Feb 5, 1992",
+        "position": "FW",
+        "club": "Real Madrid",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      },
+      {
+        "playerName": "Rodrygo",
+        "playerDob": "Apr 3, 1997",
+        "position": "FW",
+        "club": "Real Madrid",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      },
+      {
+        "playerName": "Richarlison",
+        "playerDob": "Mar 13, 1996",
+        "position": "FW",
+        "club": "Tottenham",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "goals": 3
+  },
+  "bestPassers": {
+    "players": [
+      {
+        "playerName": "Vinicius Junior",
+        "playerDob": "Feb 5, 1992",
+        "position": "FW",
+        "club": "Real Madrid",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "goalAssists": 2
+  },
+  "bestDribblers": {
+    "players": [
+      {
+        "playerName": "Vinicius Junior",
+        "playerDob": "Feb 5, 1992",
+        "position": "FW",
+        "club": "Real Madrid",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "dribbles": 4.5
+  },
+  "goalKeeper": {
+    "playerName": "Ederson",
+    "appearances": "5",
+    "savePercentage": "85%",
+    "cleanSheets": "3",
+    "club": "Manchester City"
+  },
+  "playersMostAppearances": {
+    "players": [
+      {
+        "playerName": "Vinicius Junior",
+        "playerDob": "Feb 5, 1992",
+        "position": "FW",
+        "club": "Real Madrid",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      },
+      {
+        "playerName": "Rodrygo",
+        "playerDob": "Apr 3, 1997",
+        "position": "FW",
+        "club": "Real Madrid",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      },
+      {
+        "playerName": "Richarlison",
+        "playerDob": "Mar 13, 1996",
+        "position": "FW",
+        "club": "Tottenham",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      },
+      {
+        "playerName": "Ederson",
+        "playerDob": "Aug 22, 1992",
+        "position": "GK",
+        "club": "Manchester City",
+        "brandSponsorAndUsed": "Puma",
+        "appearances": 5
+      }
+    ],
+    "appearances": 5
+  },
+  "playersMostDuelsWon": {
+    "players": [
+      {
+        "playerName": "Richarlison",
+        "playerDob": "Mar 13, 1996",
+        "position": "FW",
+        "club": "Tottenham",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "duels": 4.2
+  },
+  "playersMostInterception": {
+    "players": [
+      {
+        "playerName": "Richarlison",
+        "playerDob": "Mar 13, 1996",
+        "position": "FW",
+        "club": "Tottenham",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "interceptions": 0.4
+  },
+  "playersMostSuccessfulTackles": {
+    "players": [
+      {
+        "playerName": "Richarlison",
+        "playerDob": "Mar 13, 1996",
+        "position": "FW",
+        "club": "Tottenham",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "successfulTackles": 0.5
+  },
+  "starPlayersStats": {
+    "starPlayers": [
+      {
+        "playerName": "Vinicius Junior",
+        "categories": ["TOP_SCORERS", "BEST_PASSERS", "BEST_DRIBBLERS", "MOST_APPEARANCES"]
+      },
+      {
+        "playerName": "Rodrygo",
+        "categories": ["TOP_SCORERS", "MOST_APPEARANCES"]
+      },
+      {
+        "playerName": "Richarlison",
+        "categories": ["TOP_SCORERS", "MOST_APPEARANCES", "MOST_DUELS_WON", "MOST_INTERCEPTIONS", "MOST_SUCCESSFUL_TACKLES"]
+      }
+    ]
+  }
+}

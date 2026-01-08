@@ -1,0 +1,105 @@
+{
+  "teamName": "Portugal",
+  "teamTotalGoals": 1,
+  "nationalTeamKitSponsor": "Nike",
+  "performanceRating": 8,
+  "teamStyle": "BALANCED",
+  "goalkeeperReliability": "RELIABLE",
+  "topScorers": {
+    "players": [
+      {
+        "playerName": "Cristiano Ronaldo",
+        "playerDob": "Feb 5, 1985",
+        "position": "FW",
+        "club": "Al-Nassr",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "goals": 1
+  },
+  "bestPassers": {
+    "players": [],
+    "goalAssists": 0
+  },
+  "bestDribblers": {
+    "players": [
+      {
+        "playerName": "Cristiano Ronaldo",
+        "playerDob": "Feb 5, 1985",
+        "position": "FW",
+        "club": "Al-Nassr",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "dribbles": 1.2
+  },
+  "goalKeeper": {
+    "playerName": "Cristiano Ronaldo",
+    "appearances": "5",
+    "savePercentage": "75%",
+    "cleanSheets": "0",
+    "club": "Al-Nassr"
+  },
+  "playersMostAppearances": {
+    "players": [
+      {
+        "playerName": "Cristiano Ronaldo",
+        "playerDob": "Feb 5, 1985",
+        "position": "FW",
+        "club": "Al-Nassr",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "appearances": 5
+  },
+  "playersMostDuelsWon": {
+    "players": [
+      {
+        "playerName": "Cristiano Ronaldo",
+        "playerDob": "Feb 5, 1985",
+        "position": "FW",
+        "club": "Al-Nassr",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "duels": 2.5
+  },
+  "playersMostInterception": {
+    "players": [
+      {
+        "playerName": "Cristiano Ronaldo",
+        "playerDob": "Feb 5, 1985",
+        "position": "FW",
+        "club": "Al-Nassr",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "interceptions": 0.1
+  },
+  "playersMostSuccessfulTackles": {
+    "players": [
+      {
+        "playerName": "Cristiano Ronaldo",
+        "playerDob": "Feb 5, 1985",
+        "position": "FW",
+        "club": "Al-Nassr",
+        "brandSponsorAndUsed": "Nike",
+        "appearances": 5
+      }
+    ],
+    "successfulTackles": 0.2
+  },
+  "starPlayersStats": {
+    "starPlayers": [
+      {
+        "playerName": "Cristiano Ronaldo",
+        "categories": ["TOP_SCORERS", "BEST_DRIBBLERS", "MOST_APPEARANCES", "MOST_DUELS_WON", "MOST_INTERCEPTIONS", "MOST_SUCCESSFUL_TACKLES"]
+      }
+    ]
+  }
+}
