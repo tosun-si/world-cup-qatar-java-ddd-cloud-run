@@ -3,6 +3,8 @@
 Real World use case with an application using DDD and Clean Architecture, deployed as a Serverless application on 
 Cloud Run (GCP) with GraalVM native compilation for improved cold start performance.
 
+![architecture-diagram.png](docs/architecture-diagram.png)
+
 ## Use Case
 
 This application processes FIFA World Cup Qatar 2022 team player statistics:
@@ -172,7 +174,7 @@ gcloud builds submit \
     --project=$PROJECT_ID \
     --region=$LOCATION \
     --config cicd/standard/deploy-cloud-run-image-standard.yaml \
-    --substitutions _REPO_NAME="$REPO_NAME",_SERVICE_NAME_STANDARD="$SERVICE_NAME_STANDARD",_IMAGE_TAG="$IMAGE_TAG",_SERVICE_ACCOUNT="$SERVICE_ACCOUNT" \
+    --substitutions _REPO_NAME="$REPO_NAME",_SERVICE_NAME_STANDARD="$SERVICE_NAME_STANDARD",_IMAGE_TAG="$IMAGE_TAG" \
     --verbosity="debug" .
 ```
 
@@ -206,7 +208,7 @@ docker run -it \
     -e ALLOY_DB_INSTANCE_NAME="$ALLOY_DB_INSTANCE_NAME" \
     -e ALLOY_DB_USERNAME="$ALLOY_DB_USERNAME" \
     -e ALLOY_DB_PASSWORD="$ALLOY_DB_PASSWORD" \
-    -v $HOME/.config/gcloud:/root/.config/gcloud \
+    -v "$HOME/.config/gcloud:/home/appuser/.config/gcloud:ro" \
     $SERVICE_NAME_STANDARD
 ```
 
@@ -294,6 +296,6 @@ docker run -it \
     -e ALLOY_DB_INSTANCE_NAME="$ALLOY_DB_INSTANCE_NAME" \
     -e ALLOY_DB_USERNAME="$ALLOY_DB_USERNAME" \
     -e ALLOY_DB_PASSWORD="$ALLOY_DB_PASSWORD" \
-    -v $HOME/.config/gcloud:/root/.config/gcloud \
+    -v "$HOME/.config/gcloud:/home/nonroot/.config/gcloud:ro" \
     $SERVICE_NAME_NATIVE_GRAAL_VM
 ```

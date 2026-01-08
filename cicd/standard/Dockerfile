@@ -1,6 +1,7 @@
-FROM maven:3-eclipse-temurin-23-alpine as builder
+FROM maven:3-eclipse-temurin-23-alpine AS builder
 
-WORKDIR /app
+ENV WORKDIR=/usr/local/src/app
+WORKDIR $WORKDIR
 
 COPY pom.xml ./
 
@@ -12,8 +13,19 @@ RUN mvn package -DskipTests
 
 FROM eclipse-temurin:23-jre
 
-WORKDIR /app
+LABEL org.opencontainers.image.title="World Cup Qatar Stats API" \
+      org.opencontainers.image.description="JVM image for World Cup Qatar 2022 statistics"
 
-COPY --from=builder /app/target/world-cup-qatar-java-ddd-cloud-run-*.jar /app/world-cup-qatar-java-ddd-cloud-run.jar
+ENV WORKDIR=/usr/local/src/app
+WORKDIR $WORKDIR
 
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/world-cup-qatar-java-ddd-cloud-run.jar"]
+RUN adduser --disabled-password --gecos '' --home /home/appuser appuser && \
+    chown -R appuser $WORKDIR
+
+COPY --from=builder --chown=appuser:appuser $WORKDIR/target/world-cup-qatar-java-ddd-cloud-run-*.jar $WORKDIR/world-cup-qatar-java-ddd-cloud-run.jar
+
+USER appuser
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "world-cup-qatar-java-ddd-cloud-run.jar"]

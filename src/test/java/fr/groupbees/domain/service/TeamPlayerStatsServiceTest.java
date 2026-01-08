@@ -53,8 +53,13 @@ class TeamPlayerStatsServiceTest {
 
     private static Stream<Arguments> teamTestCases() {
         return Stream.of(
+                // Standard cases.
                 Arguments.of("France", "france_team_input.json", "france_team_expected.json"),
-                Arguments.of("Argentina", "argentina_team_input.json", "argentina_team_expected.json")
+                Arguments.of("Argentina", "argentina_team_input.json", "argentina_team_expected.json"),
+                // Edge cases.
+                Arguments.of("Portugal (single player)", "edge_single_player_input.json", "edge_single_player_expected.json"),
+                Arguments.of("Brazil (tied scorers)", "edge_tied_scorers_input.json", "edge_tied_scorers_expected.json"),
+                Arguments.of("Morocco (no goals)", "edge_no_goals_input.json", "edge_no_goals_expected.json")
         );
     }
 }
